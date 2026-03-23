@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap');
+
+.minimal-container {
+  --bg: #f6f6f4;
+  --panel: #ffffff;
+  --text: #0d0d0d;
+  --muted: #7a7a7a;
+  --border: #e8e8e5;
+  --accent: #111111;
+  --highlight: #efefe9;
+  --minimal-heading-font: 'Fraunces', Georgia, serif;
+  --minimal-body-font: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.minimal-container {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding: 84px 28px 108px;
+}
+
+.minimal-column {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.minimal-sheet {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: clamp(34px, 4vw, 56px) clamp(22px, 5vw, 84px) clamp(44px, 5.5vw, 78px);
+}
+
+.minimal-header {
+  margin: clamp(6px, 1vw, 14px) 0 72px;
+  padding-left: clamp(0px, 6vw, 84px);
+}
+
+.minimal-title {
+  margin: 0;
+  font-family: var(--minimal-heading-font);
+  max-width: 13ch;
+  font-size: clamp(2.05rem, 5vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-left: clamp(-20px, -2.2vw, -12px);
+  text-wrap: balance;
+}
+
+.minimal-dek {
+  margin: 20px 0 0;
+  max-width: 52ch;
+  font-family: var(--minimal-body-font);
+  font-size: 1rem;
+  line-height: 1.78;
+  color: var(--muted);
+  margin-left: clamp(0px, 4vw, 42px);
+}
+
+.minimal-meta {
+  margin: 0 0 14px;
+  font-family: var(--minimal-body-font);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.minimal-divider {
+  height: 0;
+  margin: 0 0 44px;
+  border: none;
+  border-top: 1px solid var(--border);
+  max-width: 62ch;
+  margin-left: clamp(0px, 8vw, 96px);
+}
+
+.minimal-quote {
+  margin: 0 0 62px;
+  max-width: 34ch;
+  margin-left: clamp(12px, 14vw, 170px);
+  padding: 2px 0 2px 18px;
+  border-left: 1px solid var(--accent);
+  font-family: var(--minimal-heading-font);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--accent);
+}
+
+.minimal-body {
+  margin: 0;
+  max-width: 63ch;
+  margin-left: clamp(0px, 7vw, 88px);
+  font-family: var(--minimal-body-font);
+  font-size: 1rem;
+  line-height: 1.92;
+  color: var(--text);
+}
+
+.minimal-paragraph {
+  margin: 0 0 1.48rem;
+}
+
+.minimal-paragraph:nth-child(2n) {
+  margin-bottom: 1.92rem;
+}
+
+.minimal-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.minimal-body-dense .minimal-paragraph {
+  margin-bottom: 1.05rem;
+}
+
+.minimal-body-dense .minimal-paragraph:nth-child(2n) {
+  margin-bottom: 1.22rem;
+}
+
+.minimal-body-sparse .minimal-paragraph {
+  margin-bottom: 1.8rem;
+}
+
+.minimal-body-sparse .minimal-paragraph:nth-child(2n) {
+  margin-bottom: 2.4rem;
+}
+
+.minimal-highlights {
+  margin-top: 56px;
+  max-width: 52ch;
+  margin-left: clamp(0px, 12vw, 146px);
+}
+
+.minimal-highlight-row {
+  margin: 0 0 0.72rem;
+}
+
+.minimal-highlight {
+  display: inline;
+  background: var(--highlight);
+  color: var(--text);
+  padding: 0.06em 0.22em;
+}
+
+@media (max-width: 760px) {
+  .minimal-container {
+    padding: 34px 14px 62px;
+  }
+
+  .minimal-sheet {
+    padding: 26px 20px 34px;
+  }
+
+  .minimal-header,
+  .minimal-body,
+  .minimal-divider,
+  .minimal-highlights,
+  .minimal-dek {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .minimal-title {
+    margin-left: 0;
+  }
+
+  .minimal-quote {
+    margin-left: 0;
+    max-width: 100%;
+    margin-bottom: 42px;
+    font-size: 1.12rem;
+    line-height: 1.52;
+  }
+}

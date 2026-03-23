@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+.papyrus-container {
+  /* Warm, aged parchment palette */
+  --bg: #f4ecd8;
+  --paper: #f8f1df;
+  --ink: #2c1b12;
+  --muted: #7a6a58;
+  --accent: #8b3a2e;
+  --border: #d6c3a3;
+  --papyrus-display-font: 'Arapey', serif;
+  --papyrus-body-font: 'Lora', serif;
+}
+
+/* Parchment paper texture background */
+.papyrus-container {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--papyrus-body-font);
+  padding: 48px 24px;
+  position: relative;
+}
+
+/* Subtle texture overlay using CSS gradients */
+.papyrus-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(210, 180, 140, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 58, 46, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(122, 106, 88, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.papyrus-column {
+  max-width: 580px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Manuscript page appearance */
+.papyrus-sheet {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(44, 27, 18, 0.08);
+  padding: 48px 40px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+/* Subtle vignette effect on sheet edges */
+.papyrus-sheet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 0%, rgba(44, 27, 18, 0.02) 100%);
+  pointer-events: none;
+}
+
+/* Page content sits on top of vignette */
+.papyrus-sheet > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Main title in elegant calligraphy */
+.papyrus-title {
+  margin: 0 0 16px;
+  font-family: var(--papyrus-display-font);
+  font-size: 42px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-align: center;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Subtitle/dek in elegant serif */
+.papyrus-dek {
+  margin: 0 0 32px;
+  font-family: var(--papyrus-body-font);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Body text - highly readable serif */
+.papyrus-body {
+  margin: 0;
+  font-family: var(--papyrus-body-font);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
+/* Metadata / archival label */
+.papyrus-meta {
+  margin: 0 0 24px;
+  font-family: var(--papyrus-body-font);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Pull quote styled like handwritten excerpt */
+.papyrus-quote {
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: rgba(139, 58, 46, 0.04);
+  border-left: 3px solid var(--accent);
+  font-family: var(--papyrus-body-font);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* Ornamental divider line */
+.papyrus-divider {
+  height: 0;
+  margin: 32px 0;
+  border: none;
+  border-top: 1px solid var(--border);
+  position: relative;
+}
+
+/* Decorative element in divider center */
+.papyrus-divider::after {
+  content: '§';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 12px;
+  color: var(--muted);
+  font-family: var(--papyrus-body-font);
+  font-size: 14px;
+}
+
+/* Highlight text - soft annotation style */
+.papyrus-highlight {
+  display: inline;
+  background: rgba(139, 58, 46, 0.08);
+  color: var(--ink);
+  padding: 2px 4px;
+  border-bottom: 1px solid var(--accent);
+  font-weight: 500;
+}
+
+/* Paragraph spacing */
+.papyrus-body p {
+  margin-bottom: 20px;
+}
+
+.papyrus-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Highlights section */
+.papyrus-highlights {
+  margin-top: 32px;
+}
+
+.papyrus-highlights .papyrus-meta {
+  margin-bottom: 16px;
+}
+
+.papyrus-highlights p {
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.7;
+}

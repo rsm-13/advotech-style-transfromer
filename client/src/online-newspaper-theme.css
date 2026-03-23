@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap');
+
+.online-container {
+  --bg: #ffffff;
+  --text: #121212;
+  --muted: #6b6b6b;
+  --border: #e5e5e5;
+  --accent: #2a2a2a;
+  --online-body-font: 'Source Serif 4', Georgia, serif;
+  --online-ui-font: 'Source Sans 3', Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.online-container {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  padding: 40px 20px 72px;
+}
+
+.online-column {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.online-header {
+  margin-bottom: 34px;
+}
+
+.online-title {
+  margin: 0;
+  font-family: var(--online-body-font);
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.online-dek {
+  margin: 14px 0 0;
+  font-family: var(--online-body-font);
+  font-size: 1.18rem;
+  line-height: 1.45;
+  color: var(--accent);
+  max-width: 64ch;
+}
+
+.online-meta {
+  margin: 14px 0 0;
+  font-family: var(--online-ui-font);
+  font-size: 0.82rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.online-divider {
+  height: 0;
+  margin: 26px 0 34px;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.online-quote {
+  margin: 0 0 32px;
+  padding: 2px 0 2px 18px;
+  border-left: 2px solid var(--accent);
+  font-family: var(--online-body-font);
+  font-style: italic;
+  font-size: 1.22rem;
+  line-height: 1.52;
+  color: var(--accent);
+}
+
+.online-body {
+  margin: 0;
+  font-family: var(--online-body-font);
+  font-size: 1.07rem;
+  line-height: 1.86;
+  color: var(--text);
+}
+
+.online-paragraph {
+  margin: 0 0 1.28rem;
+}
+
+.online-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.online-highlights {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.online-highlights .online-meta {
+  margin: 0 0 12px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.online-highlight-row {
+  margin: 0 0 10px;
+}
+
+.online-highlight {
+  background: rgba(42, 42, 42, 0.08);
+  padding: 0.08em 0.24em;
+}
+
+@media (max-width: 760px) {
+  .online-container {
+    padding: 24px 14px 52px;
+  }
+
+  .online-title {
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+  }
+
+  .online-dek {
+    font-size: 1.03rem;
+  }
+
+  .online-body {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+}
