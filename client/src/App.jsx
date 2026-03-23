@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import Header from './components/Header';
+import LoadingState from './components/LoadingState';
+import InstructionsPanel from './components/InstructionsPanel';
 import PixelTemplate from './components/PixelTemplate';
 import PapyrusTemplate from './components/PapyrusTemplate';
 import MinimalistTemplate from './components/MinimalistTemplate';
@@ -30,6 +33,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
+  const [currentTab, setCurrentTab] = useState('editor');
 
   const canGenerate = useMemo(() => text.trim().length > 10, [text]);
 
@@ -62,6 +66,7 @@ export default function App() {
       if (!res.ok) throw new Error(data.error || 'Analysis failed.');
       
       setResult(data.stylePlan || null);
+      setCurrentTab('editor');
     } catch (err) {
       setError(err.message || 'Something went wrong.');
     } finally {
@@ -73,49 +78,79 @@ export default function App() {
   const SelectedTemplate = result && TEMPLATE_MAP[result.theme];
 
   return (
-    <main className="app-shell">
-      <section className="input-panel">
-        <h1>Advocate Style Transformer &amp; Page Builder</h1>
-        <p className="subtitle">Paste your text. The AI reads it and automatically selects the best theme and styling. No manual theme selection needed.</p>
-
-        <label htmlFor="piece-text">Literary text</label>
-        <textarea
-          id="piece-text"
-          rows={14}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Paste literary text here..."
-        />
-
-        <button onClick={handleGenerate} disabled={!canGenerate || loading}>
-          {loading ? 'Analyzing & Generating…' : 'Generate'}
-        </button>
-
-        {error ? <p className="error">{error}</p> : null}
-      </section>
-
-      <section className="output-panel">
-        {!result ? (
-          <div className="empty-state">Generate to see AI-selected theme and styling.</div>
-        ) : (
-          <>
-            <div className="decision-panel">
-              <p className="decision-title">AI decisions</p>
-              <div className="tag-row">
-                <span className="tag theme-tag">theme: {result.theme}</span>
-                <span className="tag">tone: {result.tone}</span>
-                <span className="tag">density: {result.density}</span>
-              </div>
-              <p className="reasoning">{result.reasoning_summary}</p>
+    <>
+      <Header currentTab={currentTab} onTabChange={setCurrentTab} />
+      
+      {currentTab === 'editor' ? (
+        <main className="app-main">
+          <section className="input-panel">
+            <div className="input-header">
+              <h2>Your Piece</h2>
+              <p className="input-hint">Paste literary text. The AI will select a theme and styling.</p>
             </div>
-            {SelectedTemplate ? (
-              <SelectedTemplate data={result} text={text} settings={result.theme_settings} />
+
+            <textarea
+              id="piece-text"
+              rows={18}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Paste your writing here..."
+              className="piece-textarea"
+            />
+
+            <div className="input-footer">
+              <span className="char-count">{text.length} characters</span>
+              <button 
+                onClick={handleGenerate} 
+                disabled={!canGenerate || loading}
+                className="generate-button"
+              >
+                {loading ? 'Analyzing…' : 'Generate'}
+              </button>
+            </div>
+
+            {error ? <p className="error-message">{error}</p> : null}
+          </section>
+
+          <section className="output-panel">
+            {!result ? (
+              <div className="empty-state">
+                <div className="empty-state-content">
+                  <p className="empty-state-title">No piece yet</p>
+                  <p className="empty-state-text">Paste your writing and click Generate to see it styled.</p>
+                </div>
+              </div>
+            ) : loading ? (
+              <LoadingState />
             ) : (
-              <div className="error">Template not found for theme: {result.theme}</div>
+              <>
+                <div className="decision-panel">
+                  <div className="decision-header">
+                    <span className="decision-label">AI Selection</span>
+                  </div>
+                  <div className="decision-tags">
+                    <span className="tag theme-tag">{result.theme}</span>
+                    <span className="tag">{result.tone}</span>
+                    <span className="tag">{result.density}</span>
+                  </div>
+                  <p className="decision-reasoning">{result.reasoning_summary}</p>
+                </div>
+                {SelectedTemplate ? (
+                  <div className="template-container">
+                    <SelectedTemplate data={result} text={text} settings={result.theme_settings} />
+                  </div>
+                ) : (
+                  <div className="error-message">Template not found for theme: {result.theme}</div>
+                )}
+              </>
             )}
-          </>
-        )}
-      </section>
-    </main>
+          </section>
+        </main>
+      ) : (
+        <main className="app-main instructions-main">
+          <InstructionsPanel />
+        </main>
+      )}
+    </>
   );
 }
