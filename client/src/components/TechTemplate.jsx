@@ -15,7 +15,7 @@ function buildMetaLine(data) {
   return [tone, density, layout].filter(Boolean).join(' · ') || 'mode=terminal';
 }
 
-export default function TechTemplate({ data, text, settings }) {
+export default function TechTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -78,7 +78,7 @@ export default function TechTemplate({ data, text, settings }) {
 
           <div className="terminal-content">
             <p className="terminal-meta" style={metaStyle}>$ article.render --profile tech</p>
-            <h1 className="terminal-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+            <h1 className="terminal-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
             <p className="terminal-dek" style={dekStyle}>{data?.dek || ''}</p>
             <p className="terminal-meta" style={metaStyle}>{buildMetaLine(data)}</p>
 

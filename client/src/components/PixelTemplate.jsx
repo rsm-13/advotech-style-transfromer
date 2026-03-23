@@ -2,7 +2,7 @@ import React from 'react';
 import { createFontStack } from '../utils/loadGoogleFonts';
 
 function bodyFontFromTypography(mode) {
-  return '"Courier New", monospace';
+  return 'Press Start 2P';
 }
 
 function headingFontFromTypography(mode) {
@@ -36,7 +36,7 @@ function splitParagraphs(text) {
     .join('\n\n');
 }
 
-export default function PixelTemplate({ data, text, settings, variant = 'minimal' }) {
+export default function PixelTemplate({ data, text, title, settings, variant = 'minimal' }) {
   const s = settings || {};
   const baseAccent = s.accent_color || accentByVariant(variant);
   const accent = accentFromTone(data?.tone, baseAccent);
@@ -79,7 +79,7 @@ export default function PixelTemplate({ data, text, settings, variant = 'minimal
       <div className="pixel-column">
         <div className="pixel-box">
           <p className="pixel-meta" style={metaStyle}>ADVOCATE</p>
-          <h1 className="pixel-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+          <h1 className="pixel-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
           <p className="pixel-dek" style={dekStyle}>{data?.dek || ''}</p>
         </div>
 

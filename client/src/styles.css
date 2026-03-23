@@ -2,6 +2,21 @@
    RESET & BASE STYLES
    ============================================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Bernhard Gothic Medium';
+  src: url('./utils/BernhardGothicURW-Medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ui-body-font: 'EB Garamond', serif;
+  --ui-heading-font: 'Bernhard Gothic Medium', serif;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -13,10 +28,23 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-family: var(--ui-body-font);
   background: #fafaf8;
   color: #1a1a18;
   line-height: 1.6;
+}
+
+.app-title,
+.input-header h2,
+.decision-label,
+.empty-state-title,
+.instruction-section h2,
+.theme-item h3,
+.tab-button,
+.generate-button {
+  font-family: var(--ui-heading-font);
+  line-height: 1.125;
+  font-weight: 400;
 }
 
 /* ============================================================================
@@ -43,14 +71,44 @@ body {
 
 .header-left {
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.advocate-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.advocate-icon-image {
+  width: 45px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.advocate-logo-image {
+  display: block;
+  width: 130px;
+  max-width: 100%;
+  height: auto;
 }
 
 .app-title {
   margin: 0;
   padding: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.5px;
+  text-transform: uppercase;
   color: #1a1a18;
 }
 
@@ -104,6 +162,10 @@ body {
   min-height: calc(100vh - 80px);
 }
 
+.full-width-main {
+  grid-template-columns: 1fr;
+}
+
 .instructions-main {
   grid-template-columns: 1fr;
   max-width: 700px;
@@ -127,7 +189,8 @@ body {
   margin: 0;
   padding: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
   color: #1a1a18;
 }
 
@@ -153,6 +216,31 @@ body {
   resize: vertical;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
+.piece-title {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d4d3ce;
+  border-radius: 6px;
+  background: #fefdfb;
+  color: #1a1a18;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.piece-title:focus {
+  outline: none;
+  border-color: #1a1a18;
+  background: #ffffff;
+}
+
+.piece-title::placeholder {
+  color: #9a9a92;
+}
+
 
 .piece-textarea:focus {
   outline: none;
@@ -184,7 +272,8 @@ body {
   background: #1a1a18;
   color: #ffffff;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
   letter-spacing: 0.3px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -361,6 +450,82 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
+.theme-switcher-bar {
+  margin-top: 20px;
+  padding: 14px;
+  border: 1px solid #d4d3ce;
+  border-radius: 6px;
+  background: #fbfbf9;
+}
+
+.theme-switcher-label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--ui-heading-font);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.125;
+  text-transform: uppercase;
+  color: #5f5f57;
+  letter-spacing: 0.04em;
+}
+
+.theme-switcher-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.theme-switcher-btn {
+  border: 1px solid #d4d3ce;
+  background: #ffffff;
+  color: #3f3f37;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-family: var(--ui-heading-font);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.125;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-switcher-btn:hover {
+  border-color: #bcbab2;
+  color: #1a1a18;
+}
+
+.theme-switcher-btn.active {
+  background: #ede8df;
+  border-color: #c9c5bb;
+  color: #1a1a18;
+}
+
+/* ============================================================================
+   ROMANTIC & WOODLAND SPACING
+   ============================================================================ */
+
+.romantic-container,
+.woodland-container {
+  padding: 18px;
+}
+
+.romantic-sheet,
+.woodland-sheet {
+  padding: 24px;
+}
+
+.romantic-header,
+.woodland-header {
+  margin-bottom: 14px;
+}
+
+.romantic-body,
+.woodland-body {
+  margin-top: 8px;
+}
+
 /* ============================================================================
    INSTRUCTIONS PANEL
    ============================================================================ */
@@ -383,7 +548,8 @@ body {
   margin: 0 0 16px;
   padding: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
   color: #1a1a18;
 }
 
@@ -438,7 +604,8 @@ body {
   margin: 0 0 8px;
   padding: 0;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
   color: #1a1a18;
 }
 
@@ -495,6 +662,15 @@ body {
     font-size: 18px;
   }
 
+  .advocate-logo-image {
+    width: 150px;
+  }
+
+  .advocate-icon-image {
+    width: 20px;
+    height: 20px;
+  }
+
   .app-main {
     padding: 16px;
     gap: 24px;
@@ -527,6 +703,16 @@ body {
 
   .generate-button {
     width: 100%;
+  }
+
+  .romantic-container,
+  .woodland-container {
+    padding: 12px;
+  }
+
+  .romantic-sheet,
+  .woodland-sheet {
+    padding: 16px;
   }
 }
 

@@ -7,7 +7,7 @@
 
 export const FONT_REGISTRY = {
   romantic: {
-    heading: ['Playfair Display', 'Cormorant Garamond', 'Bodoni Moda'],
+    heading: ['Dancing Script', 'Tangerine', 'Allura'],
     body: ['EB Garamond', 'Libre Baskerville', 'Cormorant Garamond'],
     accent: ['Allura', 'Tangerine']
   },
@@ -27,9 +27,9 @@ export const FONT_REGISTRY = {
     accent: ['Inter']
   },
   woodland: {
-    heading: ['Cormorant Garamond', 'Alegreya', 'Libre Baskerville'],
-    body: ['Alegreya', 'Crimson Pro', 'Lora'],
-    accent: ['Libre Baskerville']
+    heading: ['Dosis', 'Cormorant Garamond', 'Alegreya'],
+    body: ['Dosis', 'Alegreya', 'Crimson Pro'],
+    accent: ['Dosis']
   },
   slate: {
     heading: ['Newsreader', 'Crimson Text', 'Lora'],
@@ -37,8 +37,8 @@ export const FONT_REGISTRY = {
     accent: ['Inter']
   },
   pixel: {
-    heading: ['Press Start 2P', 'Space Mono', 'Courier Prime'],
-    body: ['Courier Prime', 'JetBrains Mono', 'IBM Plex Mono'],
+    heading: ['Press Start 2P', 'Courier Prime', 'Space Mono'],
+    body: ['Press Start 2P', 'Courier Prime', 'JetBrains Mono'],
     accent: ['Press Start 2P']
   },
   print_newspaper: {

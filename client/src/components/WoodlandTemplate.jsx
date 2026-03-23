@@ -8,7 +8,7 @@ function splitParagraphs(text) {
     .filter(Boolean);
 }
 
-export default function WoodlandTemplate({ data, text, settings }) {
+export default function WoodlandTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -23,7 +23,7 @@ export default function WoodlandTemplate({ data, text, settings }) {
   };
 
   const titleStyle = {
-    fontFamily: createFontStack(s.heading_font_family || 'Cormorant Garamond'),
+    fontFamily: createFontStack(s.heading_font_family || 'Dosis'),
     fontSize: s.heading_font_size || '44px',
     fontWeight: s.heading_font_weight || 700,
     color: s.heading_color || '#2a1f18'
@@ -31,7 +31,7 @@ export default function WoodlandTemplate({ data, text, settings }) {
 
   const dekStyle = {
     fontSize: s.dek_font_size || '17px',
-    fontFamily: createFontStack(s.body_font_family || 'Cormorant Garamond'),
+    fontFamily: createFontStack(s.body_font_family || 'Dosis'),
     color: s.muted_color || '#8b7766'
   };
 
@@ -42,7 +42,7 @@ export default function WoodlandTemplate({ data, text, settings }) {
   };
 
   const bodyStyle = {
-    fontFamily: createFontStack(s.body_font_family || 'Cormorant Garamond'),
+    fontFamily: createFontStack(s.body_font_family || 'Dosis'),
     fontSize: s.body_font_size || '18px',
     fontWeight: s.body_font_weight || 400,
     lineHeight: s.line_height || 1.85,
@@ -51,7 +51,7 @@ export default function WoodlandTemplate({ data, text, settings }) {
   };
 
   const quoteStyle = {
-    fontFamily: createFontStack(s.body_font_family || 'Cormorant Garamond'),
+    fontFamily: createFontStack(s.body_font_family || 'Dosis'),
     fontSize: s.body_font_size || '18px',
     fontStyle: s.use_italics_for_quotes ? 'italic' : 'normal',
     color: s.muted_color || '#8b7766',
@@ -64,7 +64,7 @@ export default function WoodlandTemplate({ data, text, settings }) {
         <div className="woodland-sheet" style={{ backgroundColor: s.panel_color || '#f5ede2' }}>
           <header className="woodland-header" style={headerStyle}>
             <p className="woodland-meta" style={metaStyle}>From Nature's Archive</p>
-            <h1 className="woodland-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+            <h1 className="woodland-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
             <p className="woodland-dek" style={dekStyle}>{data?.dek || ''}</p>
           </header>
 

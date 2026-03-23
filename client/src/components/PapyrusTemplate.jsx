@@ -8,7 +8,7 @@ function splitParagraphs(text) {
     .filter(Boolean);
 }
 
-export default function PapyrusTemplate({ data, text, settings }) {
+export default function PapyrusTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -63,7 +63,7 @@ export default function PapyrusTemplate({ data, text, settings }) {
       <div className="papyrus-column">
         <div className="papyrus-sheet" style={{ backgroundColor: s.panel_color || '#faf7ee' }}>
           <p className="papyrus-meta" style={metaStyle}>Manuscript</p>
-          <h1 className="papyrus-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+          <h1 className="papyrus-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
           <p className="papyrus-dek" style={dekStyle}>{data?.dek || ''}</p>
         </div>
 

@@ -15,7 +15,7 @@ function buildMetaLine(data) {
   return [tone, density, hero].filter(Boolean).join(' • ') || 'Staff Reporter';
 }
 
-export default function OnlineNewspaperTemplate({ data, text, settings }) {
+export default function OnlineNewspaperTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -69,7 +69,7 @@ export default function OnlineNewspaperTemplate({ data, text, settings }) {
     <article className="online-container" style={containerStyle}>
       <div className="online-column">
         <header className="online-header" style={headerStyle}>
-          <h1 className="online-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+          <h1 className="online-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
           <p className="online-dek" style={dekStyle}>{data?.dek || ''}</p>
           <p className="online-meta" style={metaStyle}>{buildMetaLine(data)}</p>
         </header>

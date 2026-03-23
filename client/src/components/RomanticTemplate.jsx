@@ -8,7 +8,7 @@ function splitParagraphs(text) {
     .filter(Boolean);
 }
 
-export default function RomanticTemplate({ data, text, settings }) {
+export default function RomanticTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -23,7 +23,7 @@ export default function RomanticTemplate({ data, text, settings }) {
   };
 
   const titleStyle = {
-    fontFamily: createFontStack(s.heading_font_family || 'Playfair Display'),
+    fontFamily: createFontStack(s.heading_font_family || 'Dancing Script', 'cursive'),
     fontSize: s.heading_font_size || '42px',
     fontWeight: s.heading_font_weight || 700,
     color: s.heading_color || '#4a2f2a'
@@ -64,7 +64,7 @@ export default function RomanticTemplate({ data, text, settings }) {
         <div className="romantic-sheet" style={{ backgroundColor: s.panel_color || '#fff8f6' }}>
           <header className="romantic-header" style={headerStyle}>
             <p className="romantic-meta" style={metaStyle}>A Lyrical Reading</p>
-            <h1 className="romantic-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+            <h1 className="romantic-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
             <p className="romantic-dek" style={dekStyle}>{data?.dek || ''}</p>
           </header>
 

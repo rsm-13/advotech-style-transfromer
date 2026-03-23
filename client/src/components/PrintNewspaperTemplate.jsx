@@ -15,7 +15,7 @@ function buildMetaLine(data) {
   return [tone, density, layout].filter(Boolean).join(' • ') || 'Editorial Desk';
 }
 
-export default function PrintNewspaperTemplate({ data, text, settings }) {
+export default function PrintNewspaperTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -69,7 +69,7 @@ export default function PrintNewspaperTemplate({ data, text, settings }) {
     <article className="newspaper-container" style={containerStyle}>
       <div className="newspaper-page" style={{ backgroundColor: s.panel_color || '#ffffff' }}>
         <header className="newspaper-header" style={headerStyle}>
-          <h1 className="newspaper-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+          <h1 className="newspaper-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
           <p className="newspaper-dek" style={dekStyle}>{data?.dek || ''}</p>
           <p className="newspaper-meta" style={metaStyle}>{buildMetaLine(data)}</p>
         </header>

@@ -15,7 +15,7 @@ function buildMeta(data) {
   return [tone, density, type].filter(Boolean).join(' • ') || 'Editorial Mode';
 }
 
-export default function SlateTemplate({ data, text, settings }) {
+export default function SlateTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
 
@@ -71,7 +71,7 @@ export default function SlateTemplate({ data, text, settings }) {
         <section className="slate-sheet" style={{ backgroundColor: s.panel_color || '#15191e' }}>
           <header className="slate-header" style={headerStyle}>
             <p className="slate-meta" style={metaStyle}>{buildMeta(data)}</p>
-            <h1 className="slate-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+            <h1 className="slate-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
             <p className="slate-dek" style={dekStyle}>{data?.dek || ''}</p>
           </header>
 

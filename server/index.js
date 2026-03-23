@@ -40,7 +40,7 @@ const VALID_THEMES = [
 const FONT_OPTIONS = {
   pixel: {
     heading: ['Press Start 2P', 'Courier New'],
-    body: ['Courier New', 'Press Start 2P'],
+    body: ['Press Start 2P', 'Courier New'],
     meta: ['Courier New']
   },
   papyrus: {
@@ -74,12 +74,12 @@ const FONT_OPTIONS = {
     meta: ['Inter', 'Roboto']
   },
   woodland: {
-    heading: ['Cormorant Garamond', 'Alegreya', 'Lora'],
-    body: ['Cormorant Garamond', 'Alegreya', 'Lora'],
+    heading: ['Dosis', 'Cormorant Garamond', 'Alegreya'],
+    body: ['Dosis', 'Cormorant Garamond', 'Alegreya'],
     meta: ['Inter', 'Roboto']
   },
   romantic: {
-    heading: ['Playfair Display', 'Cormorant Garamond', 'Bodoni Moda'],
+    heading: ['Dancing Script', 'Tangerine', 'Allura'],
     body: ['Cormorant Garamond', 'Libre Baskerville', 'EB Garamond'],
     meta: ['Inter', 'Libre Franklin']
   }
@@ -101,7 +101,7 @@ const DEFAULT_THEME_SETTINGS = {
     heading_color: '#0a0a08',
     accent_color: '#1f6a4a',
     border_color: '#2a2a28',
-    body_font_family: 'Courier New',
+    body_font_family: 'Press Start 2P',
     heading_font_family: 'Press Start 2P',
     meta_font_family: 'Courier New',
     body_font_weight: 400,
@@ -297,8 +297,8 @@ const DEFAULT_THEME_SETTINGS = {
     heading_color: '#2a1f18',
     accent_color: '#8b5e3c',
     border_color: '#c7b9a8',
-    body_font_family: 'Cormorant Garamond',
-    heading_font_family: 'Cormorant Garamond',
+    body_font_family: 'Dosis',
+    heading_font_family: 'Dosis',
     meta_font_family: 'Inter',
     body_font_weight: 400,
     heading_font_weight: 700,
@@ -326,7 +326,7 @@ const DEFAULT_THEME_SETTINGS = {
     accent_color: '#b35a5a',
     border_color: '#e6d4d0',
     body_font_family: 'Cormorant Garamond',
-    heading_font_family: 'Playfair Display',
+    heading_font_family: 'Dancing Script',
     meta_font_family: 'Inter',
     body_font_weight: 400,
     heading_font_weight: 700,
@@ -368,7 +368,12 @@ Do NOT invent font names. Do NOT suggest fonts not in this list.
 If a font is not listed, pick the first option from its category.`;
 }
 
-function buildAnalysisPrompt(text) {
+function buildAnalysisPrompt(text, providedTitle = '') {
+  const normalizedTitle = (providedTitle || '').trim();
+  const titleInstruction = normalizedTitle
+    ? `User-provided title (do not rewrite): "${normalizedTitle}"`
+    : 'No title provided by user. Suggest a title_variant as usual.';
+
   return `You are an editorial art-direction engine for literary presentation.
 
 You will be given a literary piece.
@@ -382,6 +387,8 @@ Do NOT generate HTML, React, CSS, or code.
 Do NOT invent new themes.
 Do NOT invent font names.
 Do NOT return arbitrary unbounded style values.
+
+${titleInstruction}
 
 Choose ONE theme from these options:
 - pixel: retro 8-bit green terminal archive
@@ -656,6 +663,7 @@ function parseStyleJson(rawContent) {
 app.post('/analyze-style', async (req, res) => {
   try {
     const text = (req.body.text || '').trim();
+    const title = (req.body.title || '').trim();
 
     if (!text) {
       return res.status(400).json({ error: 'text is required.' });
@@ -666,7 +674,7 @@ app.post('/analyze-style', async (req, res) => {
       return res.status(500).json({ error: 'GROQ_API_KEY is missing. Add it to your environment.' });
     }
 
-    const prompt = buildAnalysisPrompt(text);
+    const prompt = buildAnalysisPrompt(text, title);
 
     const response = await fetch(`${GROQ_BASE_URL}/chat/completions`, {
       method: 'POST',
@@ -718,6 +726,10 @@ app.post('/analyze-style', async (req, res) => {
         details: parseError?.message || String(parseError),
         rawOutput: rawContent.slice(0, 2000)
       });
+    }
+
+    if (title) {
+      stylePlan.title_variant = title;
     }
 
     return res.json({ stylePlan });

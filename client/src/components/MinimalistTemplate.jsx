@@ -8,7 +8,7 @@ function splitParagraphs(text) {
     .filter(Boolean);
 }
 
-export default function MinimalistTemplate({ data, text, settings }) {
+export default function MinimalistTemplate({ data, text, title, settings }) {
   const bodyParagraphs = splitParagraphs(text || '');
   const highlights = Array.isArray(data?.highlight_lines) ? data.highlight_lines : [];
   const densityClass =
@@ -71,7 +71,7 @@ export default function MinimalistTemplate({ data, text, settings }) {
         <section className="minimal-sheet" style={{ backgroundColor: s.panel_color || '#fefefe' }}>
           <header className="minimal-header" style={headerStyle}>
             <p className="minimal-meta" style={metaStyle}>Editorial Edition</p>
-            <h1 className="minimal-title" style={titleStyle}>{data?.title_variant || 'Untitled'}</h1>
+            <h1 className="minimal-title" style={titleStyle}>{title?.trim() || data?.title_variant || 'Untitled'}</h1>
             <p className="minimal-dek" style={dekStyle}>{data?.dek || ''}</p>
           </header>
 
