@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { FONT_REGISTRY, getThemeFonts, validateFont } from '../fonts/fontRegistry.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -350,6 +351,23 @@ const DEFAULT_THEME_SETTINGS = {
 // PROMPT BUILDER & VALIDATION
 // ============================================================================
 
+function buildFontConstraintsSection() {
+  const constraints = [];
+  
+  for (const [theme, fonts] of Object.entries(FONT_REGISTRY)) {
+    constraints.push(
+      `${theme}: heading=[${fonts.heading.join(', ')}], body=[${fonts.body.join(', ')}]`
+    );
+  }
+  
+  return `APPROVED FONT OPTIONS BY THEME:
+${constraints.join('\n')}
+
+CRITICAL: You MUST choose fonts ONLY from the list above for your selected theme.
+Do NOT invent font names. Do NOT suggest fonts not in this list.
+If a font is not listed, pick the first option from its category.`;
+}
+
 function buildAnalysisPrompt(text) {
   return `You are an editorial art-direction engine for literary presentation.
 
@@ -362,6 +380,7 @@ Your job is to:
 
 Do NOT generate HTML, React, CSS, or code.
 Do NOT invent new themes.
+Do NOT invent font names.
 Do NOT return arbitrary unbounded style values.
 
 Choose ONE theme from these options:
@@ -374,6 +393,8 @@ Choose ONE theme from these options:
 - slate: premium dark editorial reading app
 - woodland: warm earth tones with organic feel
 - romantic: lyrical, expressive, soft palette
+
+${buildFontConstraintsSection()}
 
 Return ONLY valid JSON with this structure:
 
@@ -419,6 +440,7 @@ Return ONLY valid JSON with this structure:
 
 IMPORTANT RULES:
 - Only choose fonts from the approved list for the selected theme
+- Do NOT invent or suggest fonts not in the registry
 - Colors should form a cohesive palette that supports the theme
 - Font sizes must be reasonable and readable
 - Line height values should be between 1.5 and 1.9
@@ -431,8 +453,10 @@ ${text}`;
 }
 
 function validateFontChoice(theme, category, fontFamily) {
-  const approved = FONT_OPTIONS[theme]?.[category] || [];
-  return approved.includes(fontFamily) ? fontFamily : (approved[0] || 'serif');
+  // Use the font registry validator
+  // Note: meta_font_family falls back to body_font_family since registry only has heading/body/accent
+  const registryCategory = category === 'meta' ? 'body' : category;
+  return validateFont(theme, registryCategory, fontFamily);
 }
 
 function validateThemeSettings(theme, settings) {

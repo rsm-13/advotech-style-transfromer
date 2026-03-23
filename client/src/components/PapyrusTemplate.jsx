@@ -1,4 +1,5 @@
 import React from 'react';
+import { createFontStack } from '../utils/loadGoogleFonts';
 
 function splitParagraphs(text) {
   return text
@@ -22,7 +23,7 @@ export default function PapyrusTemplate({ data, text, settings }) {
   };
 
   const titleStyle = {
-    fontFamily: s.heading_font_family || 'Cinzel Decorative',
+    fontFamily: createFontStack(s.heading_font_family || 'Cinzel Decorative'),
     fontSize: s.heading_font_size || '36px',
     fontWeight: s.heading_font_weight || 700,
     color: s.heading_color || '#2c1b12'
@@ -30,18 +31,18 @@ export default function PapyrusTemplate({ data, text, settings }) {
 
   const dekStyle = {
     fontSize: s.dek_font_size || '16px',
-    fontFamily: s.body_font_family || 'Alegreya',
+    fontFamily: createFontStack(s.body_font_family || 'Alegreya'),
     color: s.muted_color || '#8b7355'
   };
 
   const metaStyle = {
-    fontFamily: s.meta_font_family || 'Cormorant SC',
+    fontFamily: createFontStack(s.meta_font_family || 'Cormorant SC'),
     fontSize: s.meta_font_size || '12px',
     color: s.muted_color || '#8b7355'
   };
 
   const bodyStyle = {
-    fontFamily: s.body_font_family || 'Alegreya',
+    fontFamily: createFontStack(s.body_font_family || 'Alegreya'),
     fontSize: s.body_font_size || '17px',
     fontWeight: s.body_font_weight || 400,
     lineHeight: s.line_height || 1.8,
@@ -50,7 +51,7 @@ export default function PapyrusTemplate({ data, text, settings }) {
   };
 
   const quoteStyle = {
-    fontFamily: s.body_font_family || 'Alegreya',
+    fontFamily: createFontStack(s.body_font_family || 'Alegreya'),
     fontSize: s.body_font_size || '17px',
     fontStyle: s.use_italics_for_quotes ? 'italic' : 'normal',
     color: s.muted_color || '#8b7355',

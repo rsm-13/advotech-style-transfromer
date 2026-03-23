@@ -1,4 +1,5 @@
 import React from 'react';
+import { createFontStack } from '../utils/loadGoogleFonts';
 
 function bodyFontFromTypography(mode) {
   return '"Courier New", monospace';
@@ -44,8 +45,8 @@ export default function PixelTemplate({ data, text, settings, variant = 'minimal
     '--bg': s.background_color || '#fffef9',
     '--accent': accent,
     '--panel': s.panel_color || panelByVariant(variant),
-    '--pixel-heading-font': s.heading_font_family || headingFontFromTypography(data?.typography_mode),
-    '--pixel-body-font': s.body_font_family || bodyFontFromTypography(data?.typography_mode),
+    '--pixel-heading-font': createFontStack(s.heading_font_family || headingFontFromTypography(data?.typography_mode)),
+    '--pixel-body-font': createFontStack(s.body_font_family || bodyFontFromTypography(data?.typography_mode)),
     '--text': s.text_color || '#0a0a08',
     '--heading': s.heading_color || '#0a0a08',
     '--border': s.border_color || '#2a2a28'

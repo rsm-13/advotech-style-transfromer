@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PixelTemplate from './components/PixelTemplate';
 import PapyrusTemplate from './components/PapyrusTemplate';
 import MinimalistTemplate from './components/MinimalistTemplate';
@@ -8,6 +8,7 @@ import TechTemplate from './components/TechTemplate';
 import SlateTemplate from './components/SlateTemplate';
 import WoodlandTemplate from './components/WoodlandTemplate';
 import RomanticTemplate from './components/RomanticTemplate';
+import { preloadFonts } from './utils/loadGoogleFonts';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8787';
 
@@ -31,6 +32,15 @@ export default function App() {
   const [result, setResult] = useState(null);
 
   const canGenerate = useMemo(() => text.trim().length > 10, [text]);
+
+  // Preload fonts when result is received
+  useEffect(() => {
+    if (result?.theme_settings) {
+      preloadFonts(result.theme_settings).catch(err => {
+        console.warn('Font preload error:', err);
+      });
+    }
+  }, [result]);
 
   async function handleGenerate() {
     setLoading(true);

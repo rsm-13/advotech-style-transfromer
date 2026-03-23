@@ -1,4 +1,5 @@
 import React from 'react';
+import { createFontStack } from '../utils/loadGoogleFonts';
 
 function splitParagraphs(text) {
   return text
@@ -22,7 +23,7 @@ export default function RomanticTemplate({ data, text, settings }) {
   };
 
   const titleStyle = {
-    fontFamily: s.heading_font_family || 'Playfair Display',
+    fontFamily: createFontStack(s.heading_font_family || 'Playfair Display'),
     fontSize: s.heading_font_size || '42px',
     fontWeight: s.heading_font_weight || 700,
     color: s.heading_color || '#4a2f2a'
@@ -30,18 +31,18 @@ export default function RomanticTemplate({ data, text, settings }) {
 
   const dekStyle = {
     fontSize: s.dek_font_size || '18px',
-    fontFamily: s.body_font_family || 'Cormorant Garamond',
+    fontFamily: createFontStack(s.body_font_family || 'Cormorant Garamond'),
     color: s.muted_color || '#7d5f5a'
   };
 
   const metaStyle = {
-    fontFamily: s.meta_font_family || 'Inter',
+    fontFamily: createFontStack(s.meta_font_family || 'Inter'),
     fontSize: s.meta_font_size || '12px',
     color: s.muted_color || '#7d5f5a'
   };
 
   const bodyStyle = {
-    fontFamily: s.body_font_family || 'Cormorant Garamond',
+    fontFamily: createFontStack(s.body_font_family || 'Cormorant Garamond'),
     fontSize: s.body_font_size || '17px',
     fontWeight: s.body_font_weight || 400,
     lineHeight: s.line_height || 1.8,
@@ -50,7 +51,7 @@ export default function RomanticTemplate({ data, text, settings }) {
   };
 
   const quoteStyle = {
-    fontFamily: s.body_font_family || 'Cormorant Garamond',
+    fontFamily: createFontStack(s.body_font_family || 'Cormorant Garamond'),
     fontSize: s.body_font_size || '17px',
     fontStyle: s.use_italics_for_quotes ? 'italic' : 'normal',
     color: s.muted_color || '#7d5f5a',
