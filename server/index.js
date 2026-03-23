@@ -3,7 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { FONT_REGISTRY, getThemeFonts, validateFont } from '../fonts/fontRegistry.js';
+import { FONT_REGISTRY, getThemeFonts, validateFont } from './fontRegistry.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

@@ -13,7 +13,7 @@ import WoodlandTemplate from './components/WoodlandTemplate';
 import RomanticTemplate from './components/RomanticTemplate';
 import { preloadFonts } from './utils/loadGoogleFonts';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8787';
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:8787').replace(/\/+$/, '');
 
 const TEMPLATE_MAP = {
   pixel: PixelTemplate,
